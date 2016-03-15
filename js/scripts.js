@@ -4,10 +4,11 @@ function Contact(first, last) {
   this.addresses = [];
 }
 
-function Address(street, city, state) {
+function Address(street, city, state, zip) {
   this.street = street;
   this.city = city;
   this.state = state;
+  this.zip = zip;
 }
 
 Contact.prototype.fullName = function() {
@@ -15,7 +16,7 @@ Contact.prototype.fullName = function() {
 }
 
 Address.prototype.fullAddress = function() {
-  return this.street + ", " + this.city + ", " + this.state;
+  return this.street + ", " + this.city + ", " + this.state + " " + this.zip;
 }
 
 function resetFields() {
@@ -24,6 +25,7 @@ function resetFields() {
     $("input.new-street").val("");
     $("input.new-city").val("");
     $("input.new-state").val("");
+    $("input.new-zip").val("");
 }
 
 
@@ -43,6 +45,10 @@ $(document).ready(function() {
                                    '<label for="new-state">State</label>' +
                                    '<input type="text" class="form-control new-state">' +
                                  '</div>' +
+                                 '<div class="form-group">' +
+                                    '<label for="new-zip">Zip Code</label>' +
+                                    '<input type="text" class="form-control new-zip">' +
+                                 '</div>' +
                                '</div>');
   });
 
@@ -57,7 +63,8 @@ $(document).ready(function() {
       var inputtedStreet = $(this).find("input.new-street").val();
       var inputtedCity = $(this).find("input.new-city").val();
       var inputtedState = $(this).find("input.new-state").val();
-      var newAddress = new Address(inputtedStreet, inputtedCity, inputtedState)
+      var inputtedZip = $(this).find("input.new-zip").val();
+      var newAddress = new Address(inputtedStreet, inputtedCity, inputtedState, inputtedZip)
       newContact.addresses.push(newAddress)
     });
 
